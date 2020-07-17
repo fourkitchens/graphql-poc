@@ -1,0 +1,52 @@
+{
+  "name": "graphql-poc",
+  "version": "0.0.0-development",
+  "main": "dist/index.js",
+  "private": false,
+  "license": "GPL-3.0",
+  "contributors": [
+    {
+      "name": "Peter Sieg",
+      "email": "chasingmaxwell@gmail.com"
+    },
+    {
+      "name": "Patrick Coffey",
+      "email": "patrickcoffey48@gmail.com"
+    }
+  ],
+  "engines": {
+    "node": ">=14.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/patrickocoffeyo/wombo.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "commitlint": "commitlint -e ${GIT_PARAMS}",
+    "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet",
+    "format": "yarn lint --fix ; prettier --write \"**/*.{js,ts,yml}\"",
+    "test": "NODE_ENV=test jest --coverage -c jest.config.js --verbose",
+    "type": "tsc --noEmit",
+    "watch": "yarn build -w",
+    "semantic-release": "semantic-release"
+  },
+  "devDependencies": {
+    "@commitlint/config-conventional": "^9.0.1",
+    "@semantic-release/github": "^7.0.7",
+    "@types/jest": "^26.0.3",
+    "@typescript-eslint/eslint-plugin": "^3.4.0",
+    "@typescript-eslint/parser": "^3.4.0",
+    "commitlint": "^9.0.1",
+    "eslint": "^7.3.1",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "husky": "^4.2.5",
+    "jest": "^26.1.0",
+    "lint-staged": "^10.2.11",
+    "prettier": "^2.0.5",
+    "semantic-release": "^17.1.1",
+    "ts-jest": "^26.1.1",
+    "typescript": "^3.9.7"
+  }
+}
