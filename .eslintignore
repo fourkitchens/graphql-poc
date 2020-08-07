@@ -1,2 +1,3 @@
 dist
 __coverage__
+src/types/_graphql.d.ts
