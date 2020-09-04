@@ -1,6 +1,15 @@
 import { ApolloServer } from 'apollo-server-express';
 import express from 'express';
+import config from 'config';
 import { schema } from './lib/graphql';
+
+const {
+  port,
+  host,
+}: {
+  port: number;
+  host: string;
+} = config.get('server');
 
 async function start() {
   const app = express();
@@ -9,8 +18,6 @@ async function start() {
   });
 
   server.applyMiddleware({ app });
-  const port = 3002;
-  const host = 'localhost';
   app.listen({ port }, () => {
     /* tslint:disable no-console */
     console.info(
