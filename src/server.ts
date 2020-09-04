@@ -19,5 +19,4 @@ async function start() {
   });
 }
 
-/* tslint:disable no-floating-promises */
 start();

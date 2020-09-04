@@ -6,7 +6,8 @@ import * as Query from './resolvers/Query';
 import { GraphQLSchema } from 'graphql';
 
 // @TODO: This will need to be fleshed out when we have more requirements.
-export type GraphQLContext = any;
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type GraphQLContext = {};
 
 export const typeDefs = importSchema(join(__dirname, 'typeDefs/Root.graphql'));
 
