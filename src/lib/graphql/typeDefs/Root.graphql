@@ -1,5 +1,5 @@
 # import Event from "Event.graphql"
 
 type Query {
-  events(isVirtual: Boolean!): [Event]
+  events(isVirtual: Boolean!, rsvpRequired: Boolean!): [Event]
 }

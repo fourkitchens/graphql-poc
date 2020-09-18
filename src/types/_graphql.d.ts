@@ -24,6 +24,7 @@ export type Query = {
 
 export type QueryEventsArgs = {
   isVirtual: Scalars['Boolean'];
+  rsvpRequired: Scalars['Boolean'];
 };
 
 export type Event = {
@@ -167,7 +168,7 @@ export type QueryResolvers<
     Maybe<Array<Maybe<ResolversTypes['Event']>>>,
     ParentType,
     ContextType,
-    RequireFields<QueryEventsArgs, 'isVirtual'>
+    RequireFields<QueryEventsArgs, 'isVirtual' | 'rsvpRequired'>
   >;
 }>;
 

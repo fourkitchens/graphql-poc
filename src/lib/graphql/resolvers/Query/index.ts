@@ -6,11 +6,11 @@ import type {
   Maybe,
   ResolverTypeWrapper,
   GraphQLContext,
-  Record,
 } from '@graphql-poc/graphql';
 import type { CalendarEvent, PublicEvent } from '@graphql-poc/events';
-import calendarEvents from '../../../../data/event-calendar';
-import publicEvents from '../../../../data/public-events';
+import calendarEvents from '../../../dataloaders/calendarEvents';
+import publicEvents from '../../../dataloaders/publicEvents';
+import catchLater from '../../../../util/catchLater';
 
 const calenderEventToGqlEvent = ({
   date,
@@ -38,15 +38,16 @@ const publicEventToGqlEvent = ({
 
 export const events: ResolverFn<
   Maybe<Maybe<ResolverTypeWrapper<Event>>[]>,
-  Record<string, unknown>,
+  Record<string, Event>,
   GraphQLContext,
-  RequireFields<QueryEventsArgs, 'isVirtual'>
-> = async (_, args) =>
-  [
-    ...calendarEvents
-      .filter(({ location }) => args.isVirtual && !!location.url)
-      .map(calenderEventToGqlEvent),
-    ...publicEvents.map(publicEventToGqlEvent),
+  RequireFields<QueryEventsArgs, 'isVirtual'> &
+    RequireFields<QueryEventsArgs, 'rsvpRequired'>
+> = async (_, args) => {
+  const calEventsP = catchLater(calendarEvents.load(args));
+  const pubEventsP = catchLater(publicEvents.load(args));
+  return [
+    ...(await calEventsP).map(calenderEventToGqlEvent),
+    ...(await pubEventsP).map(publicEventToGqlEvent),
   ].sort((a, b) => {
     if (a.date < b.date) {
       return -1;
@@ -54,3 +55,4 @@ export const events: ResolverFn<
 
     return 1;
   });
+};
