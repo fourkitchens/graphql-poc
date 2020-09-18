@@ -19,11 +19,19 @@ export type Scalars = {
 
 export type Query = {
   __typename?: 'Query';
-  wizard?: Maybe<Scalars['String']>;
+  events?: Maybe<Array<Maybe<Event>>>;
 };
 
-export type QueryWizardArgs = {
-  id: Scalars['Int'];
+export type QueryEventsArgs = {
+  isVirtual: Scalars['Boolean'];
+};
+
+export type Event = {
+  __typename?: 'Event';
+  date: Scalars['Float'];
+  location: Scalars['String'];
+  title: Scalars['String'];
+  description: Scalars['String'];
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -136,33 +144,47 @@ export type DirectiveResolverFn<
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
   Query: ResolverTypeWrapper<{}>;
-  String: ResolverTypeWrapper<Scalars['String']>;
-  Int: ResolverTypeWrapper<Scalars['Int']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  Event: ResolverTypeWrapper<Event>;
+  Float: ResolverTypeWrapper<Scalars['Float']>;
+  String: ResolverTypeWrapper<Scalars['String']>;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = ResolversObject<{
   Query: {};
-  String: Scalars['String'];
-  Int: Scalars['Int'];
   Boolean: Scalars['Boolean'];
+  Event: Event;
+  Float: Scalars['Float'];
+  String: Scalars['String'];
 }>;
 
 export type QueryResolvers<
   ContextType = GraphQLContext,
   ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']
 > = ResolversObject<{
-  wizard?: Resolver<
-    Maybe<ResolversTypes['String']>,
+  events?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes['Event']>>>,
     ParentType,
     ContextType,
-    RequireFields<QueryWizardArgs, 'id'>
+    RequireFields<QueryEventsArgs, 'isVirtual'>
   >;
+}>;
+
+export type EventResolvers<
+  ContextType = GraphQLContext,
+  ParentType extends ResolversParentTypes['Event'] = ResolversParentTypes['Event']
+> = ResolversObject<{
+  date?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  location?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 }>;
 
 export type Resolvers<ContextType = GraphQLContext> = ResolversObject<{
   Query?: QueryResolvers<ContextType>;
+  Event?: EventResolvers<ContextType>;
 }>;
 
 /**

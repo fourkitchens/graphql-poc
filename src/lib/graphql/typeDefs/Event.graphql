@@ -1,0 +1,6 @@
+type Event {
+  date: Float!
+  location: String!
+  title: String!
+  description: String!
+}
