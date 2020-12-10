@@ -1,0 +1,8 @@
+query events($isVirtual: Boolean!, $rsvpRequired: Boolean!) {
+  events(isVirtual: $isVirtual, rsvpRequired: $rsvpRequired) {
+    date
+    location
+    title
+    description
+  }
+}

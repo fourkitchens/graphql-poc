@@ -30,6 +30,7 @@
     "semantic-release": "semantic-release",
     "start": "yarn build && node ./dist/server.js",
     "test": "yarn build-schema-types && NODE_ENV=test jest --coverage -c jest.config.js --verbose",
+    "twatch": "yarn test --no-coverage --watch",
     "type": "tsc --noEmit",
     "watch": "nodemon --watch src --ignore src/types/_graphql.d.ts  --ext ts,graphql --exec yarn start"
   },
@@ -58,7 +59,10 @@
     "typescript": "^3.9.7"
   },
   "dependencies": {
+    "@types/config": "^0.0.36",
     "apollo-server-express": "^2.16.1",
+    "config": "^3.3.1",
+    "dataloader": "^2.0.0",
     "express": "^4.17.1",
     "graphql": "^15.3.0",
     "graphql-import": "^1.0.2",

@@ -1,3 +1,5 @@
+# import Event from "Event.graphql"
+
 type Query {
-  wizard(id: Int!): String
+  events(isVirtual: Boolean!, rsvpRequired: Boolean!): [Event]
 }
